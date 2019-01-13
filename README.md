@@ -1,26 +1,26 @@
 # barbra
 
-This is my Dockerfile to spin up [Streisand](https://github.com/StreisandEffect/streisand) server in less than 10 seconds. The Docker image will be based on Fedora 27 and come with Python 2.7 pre-installed.
+This is my Dockerfile to spin up a new [Streisand](https://github.com/StreisandEffect/streisand) server in less than 10 seconds. The Docker image is based on Fedora 27 and has Python 2.7 and Ansible pre-installed.
 
 ## Prerequisites
 
-- Docker installed on your local machine
-- Bare metal server running Ubuntu 16.04
+- Docker installed and runnning on your local machine
+- Bare metal server running Ubuntu 16.04 (LTS)
 
 ## Usage
 
-### Build image
+First, we need to prepare the Docker container or run `chomd +x run.sh && ./run.sh`.
 
 ```sh
 git clone https://github.com/schopenhauer/barbra
 docker build . -t barbra
+docker run -it barbra
 ```
 
-### Run image
+Second, we generate a new SSH key, upload it to the target server and finally launch the Streisand script
 
-```sh
-docker pull schopenhauer/barbra
-docker run -it barbra
+```
+ssh-keygen -f /root/.ssh/id_rsa -t rsa -q -N ""
 ssh-copy-id root@<streisand-server>
 ./streisand
 ```

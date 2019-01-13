@@ -6,9 +6,6 @@ RUN dnf install -y git python2-pip gcc python2-devel python2-crypto python2-pycu
 # Upgrade python's pip
 RUN pip install --upgrade --user pip
 
-# Generate SSH key
-RUN ssh-keygen -f /root/.ssh/id_rsa -t rsa -q -N ""
-
 # Clone the Streisand repository and enter the directory.
 RUN git clone https://github.com/StreisandEffect/streisand.git
 
@@ -19,7 +16,5 @@ RUN ./util/venv-dependencies.sh ./venv
 # Activate the Ansible packages that were installed.
 RUN source ./venv/bin/activate
 
-# Execute the Streisand script.
-#ENTRYPOINT ./streisand
-
+# Enter shell.
 CMD bash
